@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarefas A2</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="styles.css"> -->
+</head>
+<body>
+  
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html"><img src="assets/logo.png" alt="Logo" width="45" height="45" class="d-inline-block align-top">
+        Gerenciador 2.0
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#">Usuário</a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Sair</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="row mt-4" style="margin: 0;">
+    <div class="col-auto ml-auto">
+      <div class="input-group mb-3" style="width: 300px;">
+        <input type="text" class="form-control" id="txtPesquisa" aria-label="Username" aria-describedby="basic-addon1" placeholder="Pesquisar" style="border-radius: 10px;" onkeyup="filtroTabela(this, 'tblFinanceiro')">
+      </div>
+    </div>
+  </div>
+  
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Tabela Tarefas A2</h2>
+        <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalNovoRegistro">Novo Registro</button>
+        <!-- <button type="button" class="btn btn-primary" onclick="novo()">Novo</button> -->
+         <div  style="max-height: 20vw; overflow-y: auto; margin-bottom: 15px;">
+          <table class="table" id="tblFinanceiro">
+            <thead class="thead-dark" style="position: sticky; top: 0;">
+              <tr>
+                <th>Colaborador</th>
+                <th>Cliente</th>
+                <th>Atividade 01</th>
+                <th>Atividade 02</th>
+                <th>Atividade 03</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="lista">
+            </tbody>
+          </table>
+         </div>
+        <a href="menu.html" class="btn btn-secondary">Voltar</a>
+      </div>
+    </div>
+  </div>
+
+<!--NOVO-->
+  <div class="modal fade" id="modalNovoRegistro" tabindex="-1" role="dialog" aria-labelledby="modalNovoRegistroLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalNovoRegistroLabel">Novo Registro</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="txtFuncionario">Colaborador</label>
+              <select class="form-control" id="newFuncionario">
+                <option value="" selected disabled hidden>Selecione uma opção</option>
+                <option value="1">Usuário A</option>
+                <option value="2">Usuário B</option>
+                <option value="3">Usuário C</option>
+                <option value="4">Usuário D</option>
+                <option value="5">Usuário E</option>
+            </select>
+            </div>
+            <div class="form-group">
+              <label for="editFazenda">Cliente</label>
+              <select class="form-control" id="newFazenda">
+                  <option value="" selected disabled hidden>Selecione uma opção</option>
+                  <option value="1">Cliente 01</option>
+                  <option value="2">Cliente 02</option>
+                  <option value="3">Cliente 03</option>
+                  <option value="4">Cliente 04</option>
+                  <option value="5">Cliente 05</option>
+              </select>
+          </div>
+            <div class="form-group">
+              <label for="txtRecursosHumanos">Atividade 01</label>
+              <select class="form-control" id="newRecursosHumanos">
+                <option value="" selected disabled hidden>Selecione uma opção</option>
+                <option value="1">Em andamento</option>
+                <option value="2">Concluído</option>
+                <option value="3">Atrasado</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="txtConciliacao">Atividade 02</label>
+              <select class="form-control" id="newConciliacao">
+                <option value="" selected disabled hidden>Selecione uma opção</option>
+                <option value="1">Em andamento</option>
+                <option value="2">Concluído</option>
+                <option value="3">Atrasado</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="txtFechamento">Atividade 03</label>
+              <select class="form-control" id="newFechamento">
+                <option value="" selected disabled hidden>Selecione uma opção</option>
+                <option value="1">Em andamento</option>
+                <option value="2">Concluído</option>
+                <option value="3">Atrasado</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary" onclick="setRegistro()">Salvar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--EDITAR-->
+  <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="modalEditarLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalEditarLabel">Editar Registro</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="editFuncionario">Colaborador</label>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" aria-describedby="basic-addon1" id="editFuncionario" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="editFazenda">Cliente</label>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" aria-describedby="basic-addon1" id="editFazenda" readonly>
+              </div>
+          </div>
+            <div class="form-group">
+              <label for="editRecursosHumanos">Atividade 01</label>
+              <select class="form-control" id="editRecursosHumanos">
+                <option value="" selected disabled hidden>Selecione uma opção</option>
+                <option value="1">Em andamento</option>
+                <option value="2">Concluído</option>
+                <option value="3">Atrasado</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="editConciliacao">Atividade 02</label>
+              <select class="form-control" id="editConciliacao">
+                <option value="" selected disabled hidden>Selecione uma opção</option>
+                <option value="1">Em andamento</option>
+                <option value="2">Concluído</option>
+                <option value="3">Atrasado</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="editFechamento">Atividade 03</label>
+              <select class="form-control" id="editFechamento">
+                <option value="" selected disabled hidden>Selecione uma opção</option>
+                <option value="1">Em andamento</option>
+                <option value="2">Concluído</option>
+                <option value="3">Atrasado</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary" onclick="alterarSim()">Atualizar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- EXCLUIR -->
+<div class="modal fade" id="modalExcluir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          Confirma a exclusão?            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="excluirSim()">
+            Sim
+          </button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="fecharModal()">
+            Não
+          </button>
+        </div>
+      </div>
+    </div>
+</div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="financeiro.js"></script>
+  <!-- <script src="util.js"></script> -->
+  
